@@ -1,0 +1,25 @@
+#include <stdio.h>
+int main()
+{
+int num,sum=0;
+printf("enter size of array");
+scanf("%d",&num);
+int a[num];
+for(int i=0;i<num;i++){
+scanf("%d",&a[i]);
+}
+int *ptr=a;
+for(int i=0;i<num;i++){
+sum=sum+*ptr;
+ptr++;
+}
+printf("sum of elements in array is %d",sum);
+return 0;
+}
+
+
+output:
+
+enter size of array5
+1 23  45 6 2
+sum of elements in array is 77
