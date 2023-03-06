@@ -1,0 +1,101 @@
+#include<stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define WIN_POINT 100
+
+int main()
+{
+    int player1 = 0, player2 = 0, currentPlayer = 1;
+    int dice, newPos;
+    char choice;
+    
+    srand(time(0)); // Seed the random number generator with current time
+    
+    printf("Welcome to Snake and Ladder Game!\n");
+    
+    do
+    {
+        // Roll the dice
+        printf("Player %d's turn. Press Enter to roll the dice.\n", currentPlayer);
+        getchar(); // Wait for user input
+        dice = rand() % 6 + 1; // Generate random number from 1 to 6
+        printf("You rolled a %d.\n", dice);
+        
+        // Calculate new position
+        newPos = (currentPlayer == 1 ? player1 : player2) + dice;
+        
+        // Check if player has won
+        if (newPos == WIN_POINT)
+        {
+            printf("Congratulations! Player %d has won the game.\n", currentPlayer);
+            break;
+        }
+        else if (newPos > WIN_POINT)
+        {
+            printf("Oops! You need to roll %d or less to reach %d. Try again.\n", WIN_POINT - (currentPlayer == 1 ? player1 : player2), WIN_POINT);
+        }
+        else
+        {
+            // Check for snakes and ladders
+            switch (newPos)
+            {
+                case 4: newPos = 14; break;
+                case 9: newPos = 31; break;
+                case 17: newPos = 7; break;
+                case 20: newPos = 38; break;
+                case 28: newPos = 84; break;
+                case 40: newPos = 59; break;
+                case 51: newPos = 67; break;
+                case 54: newPos = 34; break;
+                case 62: newPos = 19; break;
+                case 63: newPos = 81; break;
+                case 64: newPos = 60; break;
+                case 71: newPos = 91; break;
+                case 87: newPos = 24; break;
+                case 93: newPos = 73; break;
+                case 95: newPos = 75; break;
+                case 99: newPos = 78; break;
+            }
+            
+            printf("You landed on %d.\n", newPos);
+            
+            // Update player position
+            if (currentPlayer == 1)
+            {
+                player1 = newPos;
+            }
+            else
+            {
+                player2 = newPos;
+            }
+        }
+        
+        // Switch player
+        currentPlayer = (currentPlayer == 1 ? 2 : 1);
+        
+    } while (1);
+    
+    return 0;
+}
+
+
+output:
+
+
+Welcome to Snake and Ladder Game!
+Player 1's turn. Press Enter to roll the dice.
+2
+You rolled a 5.
+You landed on 5.
+Player 2's turn. Press Enter to roll the dice.
+You rolled a 4.
+You landed on 14.
+Player 1's turn. Press Enter to roll the dice.
+3
+You rolled a 2.
+You landed on 7.
+Player 2's turn. Press Enter to roll the dice.
+You rolled a 6.
+You landed on 38.
+Player 1's turn. Press Enter to roll the dice.
